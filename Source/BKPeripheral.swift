@@ -56,16 +56,10 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     /// Bluetooth LE availability derived from the underlying CBPeripheralManager object.
 
     public var availability: BKAvailability {
-        #if os(iOS) || os(tvOS)
-            if #available(iOS 10.0, tvOS 10.0, *) {
-                return BKAvailability(managerState: peripheralManager.state)
-            } else {
-                return BKAvailability(peripheralManagerState: peripheralManager.peripheralManagerState)
-            }
-        #else
-            return BKAvailability(peripheralManagerState: peripheralManager.state)
-        #endif
+        return BKAvailability(managerState: peripheralManager.state)
     }
+
+
 
     /// The configuration that the BKPeripheral object was started with.
     override public var configuration: BKPeripheralConfiguration? {
@@ -81,10 +75,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     /// Currently connected remote centrals
     public var connectedRemoteCentrals: [BKRemoteCentral] {
         return connectedRemotePeers.compactMap({
-            guard let remoteCentral = $0 as? BKRemoteCentral else {
-                return nil
-            }
-            return remoteCentral
+            $0 as? BKRemoteCentral
         })
     }
 
@@ -191,16 +182,8 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
         case .unknown, .resetting:
             break
         case .unsupported, .unauthorized, .poweredOff:
-            let newCause: BKUnavailabilityCause
-            #if os(iOS) || os(tvOS)
-                if #available(iOS 10.0, tvOS 10.0, *) {
-                    newCause = BKUnavailabilityCause(managerState: peripheralManager.state)
-                } else {
-                    newCause = BKUnavailabilityCause(peripheralManagerState: peripheralManager.peripheralManagerState)
-                }
-            #else
-                newCause = BKUnavailabilityCause(peripheralManagerState: peripheralManager.state)
-            #endif
+            let newCause = BKUnavailabilityCause(managerState: peripheralManager.state)
+            
             switch stateMachine.state {
             case let .unavailable(cause):
                 let oldCause = cause
@@ -219,10 +202,11 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
             default:
                 break
             }
-        default:
+        @unknown default:
             break
         }
     }
+
 
     internal func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
 

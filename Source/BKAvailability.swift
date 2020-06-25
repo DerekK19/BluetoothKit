@@ -27,11 +27,11 @@ import CoreBluetooth
 
 public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
     switch (lhs, rhs) {
-    case (.available, .available): return true
-    case (.unavailable(cause: .any), .unavailable): return true
-    case (.unavailable, .unavailable(cause: .any)): return true
-    case (.unavailable(let lhsCause), .unavailable(let rhsCause)): return lhsCause == rhsCause
-    default: return false
+        case (.available, .available): return true
+        case (.unavailable(cause: .any), .unavailable): return true
+        case (.unavailable, .unavailable(cause: .any)): return true
+        case (.unavailable(let lhsCause), .unavailable(let rhsCause)): return lhsCause == rhsCause
+        default: return false
     }
 }
 
@@ -47,28 +47,10 @@ public enum BKAvailability: Equatable {
     case available
     case unavailable(cause: BKUnavailabilityCause)
 
-    #if os(iOS) || os(tvOS)
-    @available(iOS 10.0, tvOS 10.0, *)
-    @available(OSX, unavailable)
     internal init(managerState: CBManagerState) {
         switch managerState {
         case .poweredOn: self = .available
         default: self = .unavailable(cause: BKUnavailabilityCause(managerState: managerState))
-        }
-    }
-    #endif
-
-    internal init(centralManagerState: CBManagerState) {
-        switch centralManagerState {
-        case .poweredOn: self = .available
-        default: self = .unavailable(cause: BKUnavailabilityCause(centralManagerState: centralManagerState))
-        }
-    }
-
-    internal init(peripheralManagerState: CBManagerState) {
-        switch peripheralManagerState {
-        case .poweredOn: self = .available
-        default: self = .unavailable(cause: BKUnavailabilityCause(peripheralManagerState: peripheralManagerState))
         }
     }
 }
@@ -93,9 +75,6 @@ public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
         self = .any
     }
 
-    #if os(iOS) || os(tvOS)
-    @available(iOS 10.0, tvOS 10.0, *)
-    @available(OSX, unavailable)
     internal init(managerState: CBManagerState) {
         switch managerState {
         case .poweredOff: self = .poweredOff
@@ -105,28 +84,6 @@ public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
         default: self = nil
         }
     }
-    #endif
-
-    internal init(centralManagerState: CBManagerState) {
-        switch centralManagerState {
-        case .poweredOff: self = .poweredOff
-        case .resetting: self = .resetting
-        case .unauthorized: self = .unauthorized
-        case .unsupported: self = .unsupported
-        default: self = nil
-        }
-    }
-
-    internal init(peripheralManagerState: CBManagerState) {
-        switch peripheralManagerState {
-        case .poweredOff: self = .poweredOff
-        case .resetting: self = .resetting
-        case .unauthorized: self = .unauthorized
-        case .unsupported: self = .unsupported
-        default: self = nil
-        }
-    }
-
 }
 
 /**
