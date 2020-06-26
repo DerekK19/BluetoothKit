@@ -25,6 +25,7 @@
 import Foundation
 import CoreBluetooth
 
+@available(OSX 10.13, iOS 10.0, *)
 public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
     switch (lhs, rhs) {
         case (.available, .available): return true
@@ -42,6 +43,7 @@ public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
 
     The unavailable case can be accompanied by a cause.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public enum BKAvailability: Equatable {
 
     case available
@@ -63,6 +65,7 @@ public enum BKAvailability: Equatable {
     - Unauthorized: The app isn't allowed to use Bluetooth.
     - PoweredOff: Bluetooth is turned off.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
 
     case any
@@ -89,6 +92,7 @@ public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
 /**
     Classes that can be observed for Bluetooth LE availability implement this protocol.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public protocol BKAvailabilityObservable: class {
     var availabilityObservers: [BKWeakAvailabilityObserver] { get set }
     func addAvailabilityObserver(_ availabilityObserver: BKAvailabilityObserver)
@@ -98,6 +102,7 @@ public protocol BKAvailabilityObservable: class {
 /**
     Class used to hold a weak reference to an observer of Bluetooth LE availability.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public class BKWeakAvailabilityObserver {
     weak var availabilityObserver: BKAvailabilityObserver?
     init (availabilityObserver: BKAvailabilityObserver) {
@@ -105,6 +110,7 @@ public class BKWeakAvailabilityObserver {
     }
 }
 
+@available(OSX 10.13, iOS 10.0, *)
 public extension BKAvailabilityObservable {
 
     /**
@@ -132,6 +138,7 @@ public extension BKAvailabilityObservable {
 /**
     Observers of Bluetooth LE availability should implement this protocol.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public protocol BKAvailabilityObserver: class {
 
     /**

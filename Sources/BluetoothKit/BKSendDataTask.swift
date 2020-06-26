@@ -24,10 +24,12 @@
 
 import Foundation
 
+@available(OSX 10.13, iOS 10.0, *)
 internal func == (lhs: BKSendDataTask, rhs: BKSendDataTask) -> Bool {
     return lhs.destination == rhs.destination && lhs.data == rhs.data
 }
 
+@available(OSX 10.13, iOS 10.0, *)
 internal class BKSendDataTask: Equatable {
 
     // MARK: Properties

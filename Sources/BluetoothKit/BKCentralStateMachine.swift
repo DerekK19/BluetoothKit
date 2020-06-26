@@ -24,6 +24,7 @@
 
 import Foundation
 
+@available(OSX 10.13, iOS 10.0, *)
 internal class BKCentralStateMachine {
 
     // MARK: Enums

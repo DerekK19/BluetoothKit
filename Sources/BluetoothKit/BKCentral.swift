@@ -28,6 +28,7 @@ import CoreBluetooth
 /**
     The central's delegate is called when asynchronous events occur.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public protocol BKCentralDelegate: class {
     /**
         Called when a remote peripheral disconnects or is disconnected.
@@ -43,6 +44,7 @@ public protocol BKCentralDelegate: class {
     and connects to them. When a connection is established the central can receive data from the remote peripheral.
 */
 
+@available(OSX 10.13, iOS 10.0, *)
 public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoolDelegate, BKAvailabilityObservable {
 
     // MARK: Type Aliases

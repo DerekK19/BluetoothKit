@@ -25,6 +25,7 @@
 import Foundation
 import CoreBluetooth
 
+@available(OSX 10.13, iOS 10.0, *)
 internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
 
     // MARK: Type Aliases

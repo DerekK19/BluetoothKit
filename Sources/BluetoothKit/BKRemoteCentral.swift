@@ -28,6 +28,7 @@ import CoreBluetooth
 /**
     Representation of a remote central.
 */
+@available(OSX 10.13, iOS 10.0, *)
 public class BKRemoteCentral: BKRemotePeer {
 
     // MARK: Properties

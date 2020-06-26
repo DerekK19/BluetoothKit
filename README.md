@@ -73,6 +73,16 @@ To integrate BluetoothKit into your Xcode project using Carthage, specify it in 
 github "rasmusth/BluetoothKit" ~> 0.4.0
 ```
 
+#### Swift Package Manager
+
+To add ObjectMapper to a Swift Package Manager based project, add:
+
+```swift
+.package(url: "https://github.com/rhummelmose/BluetoothKit.git", .upToNextMajor(from: "0.5.0")),
+```
+to your `Package.swift` files `dependencies` array.
+
+
 #### Manual
 Add the BluetoothKit project to your existing project and add BluetoothKit as an embedded binary of your target(s).
 

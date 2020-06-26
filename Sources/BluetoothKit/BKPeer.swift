@@ -24,8 +24,10 @@
 
 import Foundation
 
+@available(OSX 10.13, iOS 10.0, *)
 public typealias BKSendDataCompletionHandler = ((_ data: Data, _ remotePeer: BKRemotePeer, _ error: BKError?) -> Void)
 
+@available(OSX 10.13, iOS 10.0, *)
 public class BKPeer {
 
     /// The configuration the BKCentral object was started with.

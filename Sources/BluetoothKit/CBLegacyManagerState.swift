@@ -9,6 +9,7 @@
 import Foundation
 import CoreBluetooth
 
+@available(OSX 10.13, iOS 10.0, *)
 extension CBCentralManager {
 
     internal var centralManagerState: CBManagerState {
@@ -17,6 +18,7 @@ extension CBCentralManager {
 
 }
 
+@available(OSX 10.13, iOS 10.0, *)
 extension CBPeripheralManager {
 
     internal var peripheralManagerState: CBManagerState {

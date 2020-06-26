@@ -31,6 +31,7 @@ import Foundation
     - RemotePeerNotConnected: The action failed because the remote peer attempted to interact with, was not connected.
     - InternalError(underlyingError): Will be returned if any of the internal or private classes returns an unhandled error.
  */
+@available(OSX 10.13, iOS 10.0, *)
 public enum BKError: Error {
     case interruptedByUnavailability(cause: BKUnavailabilityCause)
     case failedToConnectDueToTimeout
